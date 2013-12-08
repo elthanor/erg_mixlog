@@ -5,7 +5,7 @@ public class main {
 		// TODO Auto-generated method stub
 		testing test;
 dhtjtjhkhkykdyddy
-rgergrrgr
+yo yo pantelas yo
 	}
 
 }
