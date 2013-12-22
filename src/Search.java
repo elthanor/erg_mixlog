@@ -6,13 +6,13 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 
-public class Customer_search extends JApplet {
+public class Search extends JApplet {
 	private JTextField txtSearchbox;
 
 	/**
 	 * Create the applet.
 	 */
-	public Customer_search() {
+	public Search() {
 		getContentPane().setLayout(null);
 		
 		txtSearchbox = new JTextField();
