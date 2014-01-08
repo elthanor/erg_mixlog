@@ -111,7 +111,20 @@ public class mixlog {
 		lblpic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblpic.setIcon(new ImageIcon(mixlog.class.getResource("/images/starrating.jpg")));
 		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (textUser.getText().length()>0 && new String(passwordField.getPassword()).length()>0) {
+					if(!checkaccount(textUser.getText(),new String(passwordField.getPassword()))) {
+						JOptionPane.showMessageDialog(null, "Wrong username/password!");
+					}
+				}
+				else {JOptionPane.showMessageDialog(null, "Enter username and password");}
+			}
+		});
 		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				signout();
+			}
+		});
 		
 		panelSearch.setVisible(false);
 		panelSearch.setBounds(0, 0, 450, 300);
@@ -145,11 +158,38 @@ public class mixlog {
 		btnProduct3.setVisible(false);
 		panelSearch.add(btnProduct3);
 		btnSignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				signout();
+			}
+		});
 		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(txtSearchbox.getText().length()>0) {
+				dbgetproducts(txtSearchbox.getText(),btnProduct1,btnProduct2,btnProduct3,btnProduct4);
+				}
+				else {JOptionPane.showMessageDialog(null, "Enter some text to search");}
+			}
+		});
 		btnProduct1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				productclicked(1);
+			}
+		});
 		btnProduct2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				productclicked(2);
+			}
+		});
 		btnProduct3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				productclicked(3);
+			}
+		});
 		btnProduct4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				productclicked(4);
+			}
+		});
 		
 		panelManager.setVisible(false);
 		panelManager.setBounds(0, 0, 450, 300);
@@ -185,9 +225,37 @@ public class mixlog {
 		txtpnReview.setEditable(false);
 		txtpnReview.setText("Review");
 		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				signout();
+			}
+		});
 		btnNewSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				newsearch();
+			}
+		});
 		btnPrevious.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int i=critics.indexOf(txtpnReview.getText());
+				i--;
+				txtpnReview.setText(critics.get(i));
+				if (i>0) {btnPrevious.setEnabled(true);}
+				else{btnPrevious.setEnabled(false);}
+				if (i==critics.size()-1) {btnNext.setEnabled(false);}
+				else {btnNext.setEnabled(true);}
+			}
+		});
 		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int i=critics.indexOf(txtpnReview.getText());
+				i++;
+				txtpnReview.setText(critics.get(i));
+				if (i>0) {btnPrevious.setEnabled(true);}
+				else{btnPrevious.setEnabled(false);}
+				if (i>=critics.size()-1) {btnNext.setEnabled(false);}
+				else {btnNext.setEnabled(true);}
+			}
+		});
 		
 		panelCustomer.setVisible(false);
 		panelCustomer.setBounds(0, 0, 450, 300);
@@ -240,9 +308,27 @@ public class mixlog {
 		btnNewSearch_Customer.setBounds(208, 266, 112, 23);
 		panelCustomer.add(btnNewSearch_Customer);
 		btnClearReview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				newsearch();
+			}
+		});
 		btnLogOutCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				signout();
+			}
+		});
 		btnNewSearch_Customer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				newsearch();
+			}
+		});
 		btnReview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(pushreview()) {
+					JOptionPane.showMessageDialog(null, "Review Submitted !");
+				}
+			}
+		});
 	}
 
 	protected boolean pushreview() {
@@ -495,6 +581,11 @@ public class mixlog {
 		rb4.setSelected(false);
 		JRadioButton rb5=(JRadioButton)panelCustomer.getComponent(11);
 		rb5.setSelected(false);
+		JButton btnPrevious=(JButton)panelManager.getComponent(2);
+		btnPrevious.setEnabled(false);
+		JButton btnNext=(JButton)panelManager.getComponent(3);
+		btnNext.setEnabled(true);
+		
 		return true;
 	}
 }
