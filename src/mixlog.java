@@ -106,7 +106,7 @@ public class mixlog {
 		passwordField.setBounds(99, 145, 157, 20);
 		panelLogin.add(passwordField);
 		final JLabel lblpic = new JLabel("New label");
-		lblpic.setBounds(277, 59, 163, 163);
+		lblpic.setBounds(266, 48, 174, 174);
 		panelLogin.add(lblpic);
 		lblpic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblpic.setIcon(new ImageIcon(mixlog.class.getResource("/images/starrating.jpg")));
